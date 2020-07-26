@@ -1,37 +1,26 @@
-## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/Darksoul98/Django-Docker/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## Django
+#### Assumptions
+- If both `pick_first` and `support_multiple` are `true` then `pick_first` result is chosen. 
+- `invalid_trigger` value is passed to `trigger` in params
+- In case of finite_value_validator :
+	- If any value is invalid then params is set to {}
+ 
+In case of numeric_value_validator: 
+- if pick_first is true first valid value will be selected.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+|       Endpoint    |Method          |
+|-------------------|----------------|
+|/finite_validation |POST            |
+|/numeric_validation|POST            |
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+## Docker
+Image size: 956 MB
+### Build
+```bash
+sudo docker build -t django_app .
 ```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Darksoul98/Django-Docker/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### Run
+```bash
+sudo docker run -p 80:8000 -i -t django_app
+```
