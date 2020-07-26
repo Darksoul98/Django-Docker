@@ -50,7 +50,6 @@ def validate_finite_values_entity(values: List[Dict], supported_values: List[str
 def validate_numeric_entity(values: List[Dict], invalid_trigger: str = None, key: str = None,
                             support_multiple: bool = True, pick_first: bool = False, constraint=None, var_name=None,
                             **kwargs) -> SlotValidationResult:
-    import pdb; pdb.set_trace()
     filled = False
     partially_filled = False
     trigger = True
@@ -96,7 +95,9 @@ class finitevalues(APIView):
             data = request.data
             response = validate_finite_values_entity(**data)
             return Response(response, status.HTTP_201_CREATED)
+        
         except Exception as exe:
+            print(exe)
             content = {
                 "message":"ERROR"
             }
@@ -110,6 +111,7 @@ class numeric(APIView):
             response = validate_numeric_entity(**data)
             return Response(response, status.HTTP_201_CREATED)
         except Exception as exe:
+            print(exe)
             content = {
                 "message":"ERROR"
             }
