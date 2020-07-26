@@ -11,8 +11,8 @@
 
 |       Endpoint    |Method          |
 |-------------------|----------------|
-|/finite_validation |POST            |
-|/numeric_validation|POST            |
+|/finite_validator |POST            |
+|/numeric_validator|POST            |
 
 ## Docker
 Image size: 956 MB
