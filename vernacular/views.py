@@ -47,19 +47,10 @@ def validate_finite_values_entity(values: List[Dict], supported_values: List[str
     trig = invalid_trigger if trigger else ""
     return (filled, partially_filled, trig, parameters)
 
-    # SlotValidationResult = {
-    #     "filled": filled,
-    #     "partially_filled": partially_filled,
-    #     "trigger": invalid_trigger if trigger else "",
-    #     "parameters": parameters
-    # }
-    # return SlotValidationResult
-
-
 def validate_numeric_entity(values: List[Dict], invalid_trigger: str = None, key: str = None,
                             support_multiple: bool = True, pick_first: bool = False, constraint=None, var_name=None,
                             **kwargs) -> SlotValidationResult:
-
+    import pdb; pdb.set_trace()
     filled = False
     partially_filled = False
     trigger = True
@@ -68,7 +59,7 @@ def validate_numeric_entity(values: List[Dict], invalid_trigger: str = None, key
 
     invalid_count = 0
     total = len(values)
-    if isinstance(constraint,None) or constraint=="":
+    if (constraint is None) or (constraint == ""):
         constraint = "True"
 
     if not total == 0:
@@ -92,7 +83,6 @@ def validate_numeric_entity(values: List[Dict], invalid_trigger: str = None, key
             filled = True
             trigger = False
         else:
-            # parameters = {}
             partially_filled = True
             trigger = True
 
@@ -102,15 +92,26 @@ def validate_numeric_entity(values: List[Dict], invalid_trigger: str = None, key
 class finitevalues(APIView):
 
     def post(self, request):
-        data = request.data
-        response = validate_finite_values_entity(**data)
-        # import pdb; pdb.set_trace()
-        return Response(response, status.HTTP_201_CREATED)
+        try:
+            data = request.data
+            response = validate_finite_values_entity(**data)
+            return Response(response, status.HTTP_201_CREATED)
+        except Exception as exe:
+            content = {
+                "message":"ERROR"
+            }
+            return Response(content, status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class numeric(APIView):
 
     def post(self, request):
-        data = request.data
-        response = validate_numeric_entity(**data)
-        # import pdb; pdb.set_trace()
-        return Response(response, status.HTTP_201_CREATED)
+        try:
+            data = request.data
+            response = validate_numeric_entity(**data)
+            return Response(response, status.HTTP_201_CREATED)
+        except Exception as exe:
+            content = {
+                "message":"ERROR"
+            }
+            return Response(content, status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
