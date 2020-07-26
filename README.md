@@ -22,5 +22,6 @@ sudo docker build -t django_app .
 ```
 ### Run
 ```bash
-sudo docker run -p 80:8000 -i -t django_app
+sudo docker run -p 8000:8000 -i -t django_app
 ```
+[http://0.0.0.0:8000](http://0.0.0.0:8000)
