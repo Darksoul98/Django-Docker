@@ -12,7 +12,7 @@ ADD . /app/
 # set default environment variables
 ENV PYTHONUNBUFFERED 1
 ENV LANG C.UTF-8
-ENV DEBIAN_FRONTEND=noninteractive 
+# ENV DEBIAN_FRONTEND=noninteractive 
 
 # set project environment variables
 # grab these via Python's os.environ
@@ -24,4 +24,4 @@ COPY requirements.txt ./
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 EXPOSE 8000
-CMD exec gunicorn project.wsgi:application --bind 0.0.0.0:8000 --workers 3
+CMD exec gunicorn project.wsgi:application --bind 0.0.0.0:$PORT --workers 3
